@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugestão de Compras — Gestão de Estoque</title>
+<style>
+  :root {
+    --bg: #0a1420;
+    --card: #101f30;
+    --card-border: #1c3350;
+    --cyan: #38bdf8;
+    --cyan-soft: #7dd3fc;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --text: #e5edf5;
+    --muted: #7d93ac;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    padding: 28px;
+  }
+  .wrap { max-width: 1400px; margin: 0 auto; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h1 { font-size: 24px; margin: 0; color: var(--cyan-soft); }
+  
+  .btn-voltar {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .btn-voltar:hover { border-color: var(--cyan); }
+
+  .btn-exportar {
+    background: var(--cyan);
+    color: #06121f;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+
+  .table-panel {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead th {
+    text-align: left;
+    color: var(--cyan-soft);
+    font-weight: 600;
+    padding: 10px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid currentColor;
+  }
+  .tag.yellow { color: var(--yellow); }
+  .c-green { color: var(--green); font-weight: 700; }
+  .c-red { color: var(--red); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📋 Sugestão de Compras (6 Produtos com Estoque Baixo)</h1>
+    <a href="index.html" class="btn-voltar">&larr; Voltar ao Painel</a>
+  </header>
+
+  <button class="btn-exportar" onclick="gerarTXT()">📄 Gerar Lista de Pedidos (TXT)</button>
+
+  <div class="table-panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Grupo</th>
+          <th>Fornecedor</th>
+          <th>Estoque Atual</th>
+          <th>Sugestão de Compra</th>
+          <th>Custo Estimado (R$)</th>
+          <th>Dias Restantes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Linha Poliéster Cone 5000m (Branca)</b></td>
+          <td>Linha</td>
+          <td>Coats Corrente</td>
+          <td><span class="tag yellow">12 cones</span></td>
+          <td class="c-green">+ 88 cones</td>
+          <td>R$ 1.276,00</td>
+          <td class="c-red">3 dias restantes</td>
+        </tr>
+        <tr>
+          <td><b>Linha Poliéster Cone 5000m (Preta)</b></td>
+          <td>Linha</td>
+          <td>Coats Corrente</td>
+          <td><span class="tag yellow">8 cones</span></td>
+          <td class="c-green">+ 92 cones</td>
+          <td>R$ 1.334,00</td>
+          <td class="c-red">2 dias restantes</td>
+        </tr>
+        <tr>
+          <td><b>Zíper Invisível 50cm (Branco)</b></td>
+          <td>Zíper</td>
+          <td>YKK Aviamentos</td>
+          <td><span class="tag yellow">15 un</span></td>
+          <td class="c-green">+ 135 un</td>
+          <td>R$ 283,50</td>
+          <td class="c-red">4 dias restantes</td>
+        </tr>
+        <tr>
+          <td><b>Elástico Chato 20mm Rolo 50m (Branco)</b></td>
+          <td>Elástico</td>
+          <td>Zanotti Elásticos</td>
+          <td><span class="tag yellow">3 rolos</span></td>
+          <td class="c-green">+ 37 rolos</td>
+          <td>R$ 1.184,00</td>
+          <td class="c-red">2 dias restantes</td>
+        </tr>
+        <tr>
+          <td><b>Cordão de Algodão 4mm Rolo 100m (Natural)</b></td>
+          <td>Barbante / Cordão</td>
+          <td>Canoas Cordões</td>
+          <td><span class="tag yellow">6 rolos</span></td>
+          <td class="c-green">+ 44 rolos</td>
+          <td>R$ 1.232,00</td>
+          <td class="c-red">4 dias restantes</td>
+        </tr>
+        <tr>
+          <td><b>Fio de Pesponto 80m (Azul Marinho)</b></td>
+          <td>Fio</td>
+          <td>Coats Corrente</td>
+          <td><span class="tag yellow">18 carretéis</span></td>
+          <td class="c-green">+ 32 carretéis</td>
+          <td>R$ 198,40</td>
+          <td class="c-red">5 dias restantes</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function gerarTXT() {
+  let conteudo = "LISTA DE COMPRAS - REPOSIÇÃO DE AVIAMENTOS\n";
+  conteudo += "=========================================\n\n";
+  conteudo += "1. Linha Poliéster Branca - Qtd: +88 cones | Fornecedor: Coats Corrente\n";
+  conteudo += "2. Linha Poliéster Preta - Qtd: +92 cones | Fornecedor: Coats Corrente\n";
+  conteudo += "3. Zíper Invisível 50cm Branco - Qtd: +135 un | Fornecedor: YKK Aviamentos\n";
+  conteudo += "4. Elástico Chato 20mm Branco - Qtd: +37 rolos | Fornecedor: Zanotti Elásticos\n";
+  conteudo += "5. Cordão Algodão 4mm Natural - Qtd: +44 rolos | Fornecedor: Canoas Cordões\n";
+  conteudo += "6. Fio de Pesponto Azul Marinho - Qtd: +32 carretéis | Fornecedor: Coats Corrente\n\n";
+  conteudo += "VALOR TOTAL ESTIMADO: R$ 5.507,90";
+
+  const blob = new Blob([conteudo], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "Sugestao_Compras_Aviamento.txt";
+  a.click();
+}
+</script>
+</body>
+</html>

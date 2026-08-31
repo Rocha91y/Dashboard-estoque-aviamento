@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estoque Sobressalente — Capital Preso</title>
+<style>
+  :root {
+    --bg: #0a1420;
+    --card: #101f30;
+    --card-border: #1c3350;
+    --cyan: #38bdf8;
+    --cyan-soft: #7dd3fc;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --text: #e5edf5;
+    --muted: #8ea3b8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: "Segoe UI", system-ui, sans-serif; padding: 36px 48px; font-size: 16px; }
+  .wrap { max-width: 1600px; margin: 0 auto; }
+  header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; margin-bottom: 28px; border-bottom: 1px solid var(--card-border); }
+  h1 { font-size: 28px; margin: 0; color: var(--cyan-soft); }
+  .btn-voltar { background: transparent; border: 1px solid var(--card-border); color: var(--text); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; }
+  .btn-voltar:hover { border-color: var(--cyan); }
+  .table-panel { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  thead th { text-align: left; color: var(--cyan-soft); font-weight: 600; padding: 12px 10px; border-bottom: 1px solid var(--card-border); }
+  tbody td { padding: 14px 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .tag { display: inline-block; font-size: 12px; padding: 4px 10px; border-radius: 12px; font-weight: 600; border: 1px solid currentColor; }
+  .tag.yellow { color: var(--yellow); }
+  .c-yellow { color: var(--yellow); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📦 Alerta de Estoque Alto (Capital Preso)</h1>
+    <a href="index.html" class="btn-voltar">&larr; Voltar ao Painel</a>
+  </header>
+
+  <div class="table-panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Grupo</th>
+          <th>Marca / Fornecedor</th>
+          <th>Estoque Atual</th>
+          <th>Estoque Máximo</th>
+          <th>Excedente</th>
+          <th>Valor Preso (R$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Barbante 8 Fios Rolo 400g (Cru)</b></td>
+          <td>Barbante</td>
+          <td>Canoas Cordões</td>
+          <td><span class="tag yellow">85 rolos</span></td>
+          <td>30 rolos</td>
+          <td class="c-yellow">+ 55 rolos</td>
+          <td>R$ 660,00</td>
+        </tr>
+        <tr>
+          <td><b>Zíper de Metal Reforçado 60cm (Jeans)</b></td>
+          <td>Zíper</td>
+          <td>YKK Aviamentos</td>
+          <td><span class="tag yellow">110 un</span></td>
+          <td>50 un</td>
+          <td class="c-yellow">+ 60 un</td>
+          <td>R$ 270,00</td>
+        </tr>
+        <tr>
+          <td><b>Fita de Cetim 15mm Rolo 10m (Vermelha)</b></td>
+          <td>Fita</td>
+          <td>Zanotti Elásticos</td>
+          <td><span class="tag yellow">65 rolos</span></td>
+          <td>20 rolos</td>
+          <td class="c-yellow">+ 45 rolos</td>
+          <td>R$ 247,50</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

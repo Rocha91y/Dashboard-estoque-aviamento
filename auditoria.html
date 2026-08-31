@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria — Estoque Negativo</title>
+<style>
+  :root {
+    --bg: #0a1420;
+    --card: #101f30;
+    --card-border: #1c3350;
+    --cyan: #38bdf8;
+    --cyan-soft: #7dd3fc;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --text: #e5edf5;
+    --muted: #8ea3b8;
+  }
+  * { box-sizing: border-box; }
+  body { 
+    margin: 0; 
+    background: var(--bg); 
+    color: var(--text); 
+    font-family: "Segoe UI", system-ui, sans-serif; 
+    padding: 36px 48px; 
+    font-size: 16px; 
+  }
+  .wrap { max-width: 1600px; margin: 0 auto; }
+  
+  header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding-bottom: 24px; 
+    margin-bottom: 28px; 
+    border-bottom: 1px solid var(--card-border); 
+  }
+  
+  /* Título alterado para Azul com o ícone mantido */
+  h1 { font-size: 28px; margin: 0; color: var(--cyan-soft); }
+  
+  .btn-voltar { 
+    background: transparent; 
+    border: 1px solid var(--card-border); 
+    color: var(--text); 
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-size: 14px; 
+    font-weight: 600; 
+    transition: border-color 0.15s;
+  }
+  .btn-voltar:hover { border-color: var(--cyan); }
+  
+  .table-panel { 
+    background: var(--card); 
+    border: 1px solid var(--card-border); 
+    border-radius: 12px; 
+    padding: 24px; 
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  
+  /* Cabeçalhos da Tabela alterados para Azul */
+  thead th { 
+    text-align: left; 
+    color: var(--cyan-soft); 
+    font-weight: 600; 
+    padding: 12px 10px; 
+    border-bottom: 1px solid var(--card-border); 
+  }
+  
+  tbody td { padding: 16px 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  
+  .tag { 
+    display: inline-block; 
+    font-size: 12px; 
+    padding: 4px 10px; 
+    border-radius: 12px; 
+    font-weight: 600; 
+    border: 1px solid currentColor; 
+  }
+  .tag.red { color: var(--red); }
+  
+  /* Status em amarelo sem ser em negrito */
+  .status-amarelo { 
+    color: var(--yellow); 
+    font-weight: 400; 
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>⚠️ Auditoria de Divergências (Estoque Negativo)</h1>
+    <a href="index.html" class="btn-voltar">&larr; Voltar ao Painel</a>
+  </header>
+
+  <div class="table-panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Grupo</th>
+          <th>Marca / Fornecedor</th>
+          <th>Saldo Atual</th>
+          <th>Causa Provável</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Zíper de Nylon Fixa 18cm (Preto)</b></td>
+          <td>Zíper</td>
+          <td>YKK Aviamentos</td>
+          <td><span class="tag red">-5 unidades</span></td>
+          <td>Venda baixada sem registro prévio da NF de entrada.</td>
+          <td class="status-amarelo">Aguardando ajuste de entrada</td>
+        </tr>
+        <tr>
+          <td><b>Botão 2 Furos 15mm Plast. (Tartaruga)</b></td>
+          <td>Botão</td>
+          <td>Eberle Botões</td>
+          <td><span class="tag red">-12 unidades</span></td>
+          <td>Baixa duplicada no sistema interno.</td>
+          <td class="status-amarelo">Pendente contagem física</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

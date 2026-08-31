@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Estoque — Aviamento</title>
+<style>
+  :root {
+    --bg: #0a1420;
+    --card: #101f30;
+    --card-border: #1c3350;
+    --cyan: #38bdf8;
+    --cyan-soft: #7dd3fc;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --text: #e5edf5;
+    --muted: #7d93ac;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    padding: 28px;
+  }
+  .wrap { max-width: 1400px; margin: 0 auto; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .brand { display: flex; align-items: baseline; gap: 14px; }
+  h1 { font-size: 26px; margin: 0; font-weight: 700; }
+  .brand .period { color: var(--muted); font-size: 14px; }
+  
+  nav.tabs { display: flex; gap: 8px; }
+  nav.tabs a {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--muted);
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  nav.tabs a.active {
+    color: var(--cyan-soft);
+    border-color: var(--cyan);
+    background: rgba(56,189,248,0.08);
+  }
+
+  /* Filtros Não Digitáveis */
+  .table-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    padding: 16px;
+    border-radius: 8px;
+    align-items: center;
+  }
+  .filter-group { display: flex; align-items: center; gap: 10px; }
+  .filter-group label { font-size: 13.5px; color: var(--cyan-soft); font-weight: 600; }
+  select {
+    background: #06121f;
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    outline: none;
+    cursor: pointer;
+  }
+  select:focus { border-color: var(--cyan); }
+
+  .table-panel {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead th {
+    text-align: left;
+    color: var(--cyan-soft);
+    font-weight: 600;
+    padding: 10px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  tbody td {
+    padding: 11px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  tbody tr:hover { background: rgba(56,189,248,0.05); }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid currentColor;
+  }
+  .tag.red { color: var(--red); }
+  .tag.yellow { color: var(--yellow); }
+  .tag.green { color: var(--green); }
+  .tag.cyan { color: var(--cyan-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <h1>Painel de Gestão de Estoque — Aviamento</h1>
+      <span class="period">Agosto 2026</span>
+    </div>
+    <nav class="tabs">
+      <a href="index.html">Visão Geral</a>
+      <a href="estoque.html" class="active">Tabela de Produtos</a>
+    </nav>
+  </header>
+
+  <!-- Filtros Suspensos (Menu Não Digitável) -->
+  <div class="table-controls">
+    <div class="filter-group">
+      <label for="filtro-grupo">Filtrar por Grupo:</label>
+      <select id="filtro-grupo" onchange="filtrar()">
+        <option value="todos">Todos os Grupos</option>
+        <option value="Linha">Linha</option>
+        <option value="Fio">Fio</option>
+        <option value="Barbante">Barbante</option>
+        <option value="Zíper">Zíper</option>
+        <option value="Elástico">Elástico</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="filtro-marca">Filtrar por Marca / Fornecedor:</label>
+      <select id="filtro-marca" onchange="filtrar()">
+        <option value="todos">Todas as Marcas</option>
+        <option value="Coats Corrente">Coats Corrente</option>
+        <option value="YKK Aviamentos">YKK Aviamentos</option>
+        <option value="Zanotti Elásticos">Zanotti Elásticos</option>
+        <option value="Canoas Cordões">Canoas Cordões</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table-panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Grupo</th>
+          <th>Marca / Fornecedor</th>
+          <th>Estoque</th>
+          <th>Curva ABC</th>
+          <th>Último Receb.</th>
+          <th>Dias de Venda</th>
+        </tr>
+      </thead>
+      <tbody id="corpo-tabela">
+        <!-- Preenchido dinamicamente pelo JavaScript -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const produtos = [
+  { nome: "Linha Poliéster Cone 5000m (Branca)", grupo: "Linha", marca: "Coats Corrente", est: 12, abc: "A", ult: "12/08/2026", dias: "3 dias (🔴 Crítico)" },
+  { nome: "Linha Poliéster Cone 5000m (Preta)", grupo: "Linha", marca: "Coats Corrente", est: 8, abc: "A", ult: "10/08/2026", dias: "2 dias (🔴 Crítico)" },
+  { nome: "Fio de Overlock / Nylon 100g (Cru)", grupo: "Fio", marca: "Coats Corrente", est: 45, abc: "B", ult: "22/08/2026", dias: "25 dias" },
+  { nome: "Fio de Pesponto 80m (Azul Marinho)", grupo: "Fio", marca: "Coats Corrente", est: 18, abc: "C", ult: "05/07/2026", dias: "5 dias (🔴 Crítico)" },
+  { nome: "Zíper de Nylon Fixa 18cm (Preto)", grupo: "Zíper", marca: "YKK Aviamentos", est: -5, abc: "A", ult: "01/08/2026", dias: "0 dias (⚠️ Negativo)" },
+  { nome: "Zíper Invisível 50cm (Branco)", grupo: "Zíper", marca: "YKK Aviamentos", est: 15, abc: "A", ult: "15/08/2026", dias: "4 dias (🔴 Crítico)" },
+  { nome: "Elástico Chato 20mm Rolo 50m (Branco)", grupo: "Elástico", marca: "Zanotti Elásticos", est: 3, abc: "A", ult: "20/08/2026", dias: "2 dias (🔴 Crítico)" },
+  { nome: "Cordão de Algodão 4mm Rolo 100m (Natural)", grupo: "Barbante", marca: "Canoas Cordões", est: 6, abc: "B", ult: "11/08/2026", dias: "4 dias (🔴 Crítico)" },
+  { nome: "Barbante 8 Fios Rolo 400g (Cru)", grupo: "Barbante", marca: "Canoas Cordões", est: 35, abc: "C", ult: "25/08/2026", dias: "45 dias" }
+];
+
+function renderizar(lista) {
+  const tbody = document.getElementById('corpo-tabela');
+  tbody.innerHTML = '';
+  
+  lista.forEach(p => {
+    let tagEstoque = `<span class="tag ${p.est < 0 ? 'red' : p.est < 20 ? 'yellow' : 'green'}">${p.est}</span>`;
+    
+    tbody.innerHTML += `
+      <tr>
+        <td><b>${p.nome}</b></td>
+        <td>${p.grupo}</td>
+        <td>${p.marca}</td>
+        <td>${tagEstoque}</td>
+        <td><span class="tag cyan">Classe ${p.abc}</span></td>
+        <td>${p.ult}</td>
+        <td>${p.dias}</td>
+      </tr>
+    `;
+  });
+}
+
+function filtrar() {
+  const grupo = document.getElementById('filtro-grupo').value;
+  const marca = document.getElementById('filtro-marca').value;
+
+  let resultado = produtos;
+
+  if (grupo !== 'todos') {
+    resultado = resultado.filter(p => p.grupo === grupo);
+  }
+  if (marca !== 'todos') {
+    resultado = resultado.filter(p => p.marca === marca);
+  }
+
+  renderizar(resultado);
+}
+
+// Inicializa a tabela
+renderizar(produtos);
+</script>
+</body>
+</html>
