@@ -11,221 +11,401 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0b1320;
-            color: #e2e8f0;
+            color: #ffffff;
         }
         .card-dark {
             background-color: #111c2e;
             border: 1px solid #1e2d42;
         }
-        .btn-suggestion {
+        .btn-blue-action {
             border: 1.5px solid #38bdf8;
             background-color: rgba(56, 189, 248, 0.08);
             color: #38bdf8;
             transition: all 0.2s ease-in-out;
         }
-        .btn-suggestion:hover {
+        .btn-blue-action:hover {
             background-color: #0284c7;
             color: #ffffff;
             border-color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 sm:p-8">
+<body class="min-h-screen flex flex-col p-4 sm:p-8 w-full">
 
-    <!-- Header -->
-    <header class="max-w-7xl w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <!-- Header Expandido -->
+    <header class="w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-3">
                 Painel Analítico de Estoque
-                <span class="text-xs font-normal text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">Setembro 2026</span>
+                <span class="text-xs font-normal text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">Setembro 2026</span>
             </h1>
         </div>
         <div class="flex items-center gap-2">
             <a href="index.html" class="px-4 py-2 text-xs font-semibold rounded-lg bg-sky-600 text-white border border-sky-500 shadow-lg shadow-sky-900/30">Visão Geral</a>
-            <a href="estoque.html" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800/60 text-slate-300 border border-slate-700 hover:bg-slate-700 transition">Tabela de Produtos</a>
+            <a href="estoque.html" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800/60 text-white border border-slate-700 hover:bg-slate-700 transition">Tabela de Produtos</a>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl w-full mx-auto space-y-6">
+    <!-- Main Content Full Width -->
+    <main class="w-full mx-auto space-y-6">
 
-        <!-- Banner de Tendência -->
-        <section class="card-dark p-4 rounded-xl border-l-4 border-l-sky-500 flex items-center gap-3 text-xs sm:text-sm">
-            <span class="text-base">📅</span>
-            <p>
-                <strong class="text-sky-400">Tendência Sazonal de Setembro:</strong> Aumento projetado de <strong class="text-sky-400">+35%</strong> na procura do grupo <strong class="text-slate-100">BARBANTES & CORDEIROS</strong> para a linha de Primavera.
+        <!-- CARDS FINANCEIROS (TOPO) -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card-dark p-5 rounded-xl border-l-4 border-l-emerald-500 space-y-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-white">Valor Investido (Compras)</span>
+                <div class="text-2xl font-extrabold text-white">R$ 48.250,00</div>
+                <p class="text-xs text-white">Total em mercadorias adquiridas</p>
+            </div>
+
+            <div class="card-dark p-5 rounded-xl border-l-4 border-l-sky-500 space-y-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-white">Valor Faturado (Saídas)</span>
+                <div class="text-2xl font-extrabold text-white">R$ 82.190,00</div>
+                <p class="text-xs text-white">Total faturado no período</p>
+            </div>
+
+            <div class="card-dark p-5 rounded-xl border-l-4 border-l-indigo-500 space-y-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-white">Lucro Bruto</span>
+                <div class="text-2xl font-extrabold text-white">R$ 33.940,00</div>
+                <p class="text-xs text-white">Margem operacional direta</p>
+            </div>
+
+            <div class="card-dark p-5 rounded-xl border-l-4 border-l-amber-500 space-y-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-white">Maior Receptor</span>
+                <div class="text-2xl font-extrabold text-white">Loja Centro</div>
+                <p class="text-xs text-white">38% da movimentação total</p>
+            </div>
+        </section>
+
+        <!-- Banner de Tendência Sazonal -->
+        <section class="card-dark p-4 rounded-xl border-l-4 border-l-sky-500 flex items-center gap-3 text-sm">
+            <span class="text-lg">📅</span>
+            <p class="text-white">
+                <strong class="text-sky-400">Tendência Sazonal de Setembro:</strong> Aumento projetado de <strong class="text-sky-400">+35%</strong> na procura do grupo <strong class="text-white">BARBANTES & CORDEIROS</strong> para a linha de Primavera.
             </p>
         </section>
 
-        <!-- Grid de Cards de Alerta -->
+        <!-- GRID DE CARDS DE ALERTA -->
         <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <!-- Card: Alerta Estoque Baixo -->
-            <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4 relative overflow-hidden">
-                <div class="space-y-1">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Alerta de Estoque Baixo</span>
+            <!-- Card 1: Estoque Baixo -->
+            <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
+                <div class="space-y-2">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Alerta de Estoque Baixo</h3>
                     <div class="flex items-baseline gap-2">
-                        <span id="lowStockCount" class="text-4xl font-extrabold text-amber-500">12</span>
-                        <span class="text-xl font-bold text-amber-500">produtos</span>
+                        <span class="text-4xl font-extrabold text-white">12</span>
+                        <span class="text-xl font-bold text-white">produtos</span>
                     </div>
-                    <p class="text-xs text-slate-400 pt-1">Abaixo da média ou do nível mínimo de segurança (&le; 15 un).</p>
+                    <p class="text-xs text-white">Abaixo da média ou do nível mínimo de segurança (&le; 15 un).</p>
                 </div>
 
-                <!-- Botão Reformulado: Borda Azul, Fonte Maior e Ícone de Tabela/Lista -->
                 <div class="pt-2">
-                    <button onclick="openPurchaseModal()" class="btn-suggestion w-full py-2.5 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                    <button onclick="openPurchaseModal()" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
                         <i class="fa-solid fa-list-check text-base"></i>
                         <span>Ver sugestão de compras</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Card: Alerta Estoque Alto -->
+            <!-- Card 2: Estoque Alto -->
             <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
-                <div class="space-y-1">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Alerta de Estoque Alto</span>
+                <div class="space-y-2">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Alerta de Estoque Alto</h3>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-extrabold text-amber-500">3</span>
-                        <span class="text-xl font-bold text-amber-500">produtos</span>
+                        <span class="text-4xl font-extrabold text-white">8</span>
+                        <span class="text-xl font-bold text-white">produtos</span>
                     </div>
-                    <p class="text-xs text-slate-400 pt-1">Acima da média planejada ou sem giro recente.</p>
+                    <p class="text-xs text-white">Acima da média planejada ou sem giro recente (&gt; 50 un).</p>
                 </div>
+
                 <div class="pt-2">
-                    <a href="estoque.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
-                        Ver capital preso &rarr;
-                    </a>
+                    <button onclick="openHighStockModal()" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-boxes-stacked text-base"></i>
+                        <span>Ver capital preso</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- Card: Estoque Negativo -->
+            <!-- Card 3: Estoque Negativo / Zerado -->
             <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
-                <div class="space-y-1">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Estoque Negativo / Esgotado</span>
+                <div class="space-y-2">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Estoque Negativo / Esgotado</h3>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-extrabold text-rose-500">1</span>
-                        <span class="text-xl font-bold text-rose-500">produto</span>
+                        <span class="text-4xl font-extrabold text-white">2</span>
+                        <span class="text-xl font-bold text-white">produtos</span>
                     </div>
-                    <p class="text-xs text-slate-400 pt-1">⚠️ Divergência física ou falha no registro de entrada.</p>
+                    <p class="text-xs text-white">Divergência física ou falha no registro de entrada.</p>
                 </div>
+
                 <div class="pt-2">
-                    <a href="estoque.html" class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-400 hover:text-rose-300 transition">
-                        Auditar divergências &rarr;
-                    </a>
+                    <button onclick="openNegativeModal()" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-base"></i>
+                        <span>Auditar divergências</span>
+                    </button>
                 </div>
             </div>
 
         </section>
 
-        <!-- Grid Secundário -->
+        <!-- GRID SECUNDÁRIO DE RECEBIMENTO E SAÍDA -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="card-dark p-6 rounded-xl space-y-2">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Recebimento no Mês</span>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-extrabold text-emerald-400">8 SKUs</span>
+            
+            <!-- Recebimento no Mês -->
+            <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
+                <div class="space-y-2">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Recebimento no Mês</h3>
+                    <div class="text-3xl font-extrabold text-white">8 SKUs</div>
+                    <p class="text-xs text-white">
+                        Total de <strong class="text-sky-400 font-extrabold text-sm">1.820</strong> unidades recebidas no período.
+                    </p>
                 </div>
-                <p class="text-xs text-slate-400">Total de <strong class="text-emerald-400">1.820</strong> unidades recebidas no período.</p>
+                <div>
+                    <button onclick="alert('Página de Entrada de Mercadorias')" class="btn-blue-action py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2">
+                        <i class="fa-solid fa-truck-ramp-box"></i> Detalhes do Recebimento
+                    </button>
+                </div>
             </div>
 
-            <div class="card-dark p-6 rounded-xl space-y-2">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Saída de Mercadoria</span>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-extrabold text-sky-400">12 SKUs</span>
+            <!-- Saída de Mercadoria (com as Lojas) -->
+            <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
+                <div class="space-y-2">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Saída de Mercadoria</h3>
+                    <div class="text-3xl font-extrabold text-white">12 SKUs</div>
+                    <p class="text-xs text-white">
+                        Total de <strong class="text-sky-400 font-extrabold text-sm">2.110</strong> unidades expedidas no período.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Santa Clara</span>
+                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Pinheiros</span>
+                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Sol Azul</span>
+                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Centro</span>
+                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Reposição</span>
+                    </div>
                 </div>
-                <p class="text-xs text-slate-400">Total de <strong class="text-sky-400">2.110</strong> unidades expedidas no período.</p>
+                <div>
+                    <button onclick="alert('Página de Saída por Lojas')" class="btn-blue-action py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2">
+                        <i class="fa-solid fa-store"></i> Detalhes da Expedição por Loja
+                    </button>
+                </div>
             </div>
+
         </section>
 
     </main>
 
-    <!-- Modal de Sugestão de Compras -->
-    <div id="purchaseModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-        <div class="card-dark w-full max-w-2xl rounded-2xl p-6 shadow-2xl space-y-4 border border-sky-500/30">
+    <!-- MODAL DEDICADO 1: SUGESTÃO DE COMPRAS (ESTOQUE BAIXO) -->
+    <div id="purchaseModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
+        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-sky-500/40">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-cart-flatbed text-sky-400 text-lg"></i>
-                    <h3 class="text-base font-bold text-white">Sugestão de Reposição (&le; 15 un)</h3>
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-list-check text-sky-400 text-xl"></i>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Gestão de Reposição & Compras (&le; 15 un)</h3>
+                        <p class="text-xs text-slate-300">Análise de cobertura e verificação de pedidos em aberto</p>
+                    </div>
                 </div>
-                <button onclick="closePurchaseModal()" class="text-slate-400 hover:text-white text-lg px-2">&times;</button>
+                <button onclick="closeModal('purchaseModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
             </div>
 
-            <div class="max-h-80 overflow-y-auto pr-1">
-                <table class="w-full text-left text-xs text-slate-300">
-                    <thead class="bg-slate-900/80 uppercase text-3xs font-semibold text-sky-400 sticky top-0">
+            <!-- Filtros Internos -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+                <input type="text" id="searchPurchase" onkeyup="filterPurchaseTable()" placeholder="Buscar por produto ou fornecedor..." class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-sky-500">
+                <select id="groupPurchase" onchange="filterPurchaseTable()" class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700">
+                    <option value="">Todos os Grupos</option>
+                </select>
+                <select id="brandPurchase" onchange="filterPurchaseTable()" class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700">
+                    <option value="">Todos os Fornecedores</option>
+                </select>
+            </div>
+
+            <!-- Tabela de Gestão -->
+            <div class="max-h-96 overflow-y-auto">
+                <table class="w-full text-left text-xs text-white">
+                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-sky-400 sticky top-0">
                         <tr>
-                            <th class="py-2.5 px-3">Produto</th>
-                            <th class="py-2.5 px-3">Marca</th>
-                            <th class="py-2.5 px-3 text-center">Estoque Atual</th>
-                            <th class="py-2.5 px-3 text-center">Curva ABC</th>
+                            <th class="py-3 px-3">Produto</th>
+                            <th class="py-3 px-3">Grupo / Fornecedor</th>
+                            <th class="py-3 px-3 text-center">Estoque</th>
+                            <th class="py-3 px-3 text-center">Dias Restantes</th>
+                            <th class="py-3 px-3 text-center">Sugerido Compra</th>
+                            <th class="py-3 px-3">Status do Pedido / Causa</th>
                         </tr>
                     </thead>
-                    <tbody id="modalTableBody" class="divide-y divide-slate-800/60">
-                        <!-- Gerado via JS -->
+                    <tbody id="purchaseTableBody" class="divide-y divide-slate-800">
+                        <!-- JS Populate -->
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
 
-            <div class="flex justify-between items-center pt-3 border-t border-slate-800">
-                <span class="text-xs text-slate-400">Itens críticos prioritários</span>
-                <a href="estoque.html" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-bold transition flex items-center gap-2">
-                    <i class="fa-solid fa-table"></i> Abrir Tabela Completa
-                </a>
+    <!-- MODAL DEDICADO 2: CAPITAL PRESO (ESTOQUE ALTO) -->
+    <div id="highStockModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
+        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-amber-500/40">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-boxes-stacked text-amber-400 text-xl"></i>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Análise de Capital Preso & Excesso de Estoque</h3>
+                        <p class="text-xs text-slate-300">Produtos com baixo giro ou estoque acima do limite máximo</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('highStockModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+            </div>
+
+            <!-- Tabela de Excesso -->
+            <div class="max-h-96 overflow-y-auto">
+                <table class="w-full text-left text-xs text-white">
+                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-amber-400 sticky top-0">
+                        <tr>
+                            <th class="py-3 px-3">Produto</th>
+                            <th class="py-3 px-3">Fornecedor</th>
+                            <th class="py-3 px-3 text-center">Estoque Atual</th>
+                            <th class="py-3 px-3 text-center">Dias Sem Giro</th>
+                            <th class="py-3 px-3 text-right">Valor Preso (R$)</th>
+                            <th class="py-3 px-3">Ação Recomendada</th>
+                        </tr>
+                    </thead>
+                    <tbody id="highStockTableBody" class="divide-y divide-slate-800">
+                        <!-- JS Populate -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DEDICADO 3: AUDITORIA DE DIVERGÊNCIAS (ESTOQUE NEGATIVO / ZERADO) -->
+    <div id="negativeModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
+        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-rose-500/40">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-400 text-xl"></i>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Auditoria de Divergências & Estoque Esgotado</h3>
+                        <p class="text-xs text-slate-300">Identificação de causas de ruptura e ajustes de inventário</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('negativeModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+            </div>
+
+            <!-- Tabela de Auditoria -->
+            <div class="max-h-96 overflow-y-auto">
+                <table class="w-full text-left text-xs text-white">
+                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-rose-400 sticky top-0">
+                        <tr>
+                            <th class="py-3 px-3">Produto</th>
+                            <th class="py-3 px-3">Fornecedor</th>
+                            <th class="py-3 px-3 text-center">Qtd. Física</th>
+                            <th class="py-3 px-3">Diagnóstico de Causa</th>
+                            <th class="py-3 px-3">Ação Recomendada</th>
+                        </tr>
+                    </thead>
+                    <tbody id="negativeTableBody" class="divide-y divide-slate-800">
+                        <!-- JS Populate -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="max-w-7xl w-full mx-auto mt-auto pt-8 text-center text-xs text-slate-500">
+    <footer class="w-full mx-auto mt-auto pt-8 text-center text-xs text-slate-400">
         Painel Analítico de Estoque &mdash; Vision Lab Solutions
     </footer>
 
+    <!-- SCRIPT DE DADOS E LÓGICA DE GESTÃO -->
     <script>
-        const rawCatalog = [
-            { desc: "Linha de costura (500 m)", group: "Linha", brand: "Generosa", stock: 12, abc: "Classe A" },
-            { desc: "Linha de costura (500 m)", group: "Linha", brand: "Elite", stock: 0, abc: "Classe A" },
-            { desc: "Linha para bordado (8 m)", group: "Linha", brand: "Estrela do Sul", stock: 8, abc: "Classe C" },
-            { desc: "Linha para crochê (200 g)", group: "Linha", brand: "Arte & Fio", stock: 5, abc: "Classe C" },
-            { desc: "Fio de malha (1 kg)", group: "Fio", brand: "Pontal", stock: 14, abc: "Classe A" },
-            { desc: "Tesouras de costura 21 cm", group: "Tesoura", brand: "Carmany", stock: 14, abc: "Classe A" },
-            { desc: "Fita de gorgurão 25 mm (10 m)", group: "Fita", brand: "Pontal", stock: 14, abc: "Classe B" },
-            { desc: "Botão decorativo 25 mm", group: "Botão", brand: "Riviera", stock: 13, abc: "Classe C" },
-            { desc: "Expositor de aviamentos 50 cm", group: "Apoio", brand: "Riviera", stock: 3, abc: "Classe C" },
-            { desc: "Linha de costura (100 m)", group: "Linha", brand: "Riviera", stock: 12, abc: "Classe A" },
-            { desc: "Elástico roliço 2 mm (10 m)", group: "Elástico", brand: "Riviera", stock: 15, abc: "Classe A" },
-            { desc: "Zíper invisível 25 cm", group: "Zíper", brand: "Carmany", stock: 15, abc: "Classe A" }
+        const lowStockData = [
+            { desc: "Linha de costura (500 m)", group: "Linha", brand: "Generosa", stock: 12, days: "3 dias", suggest: "100 un", status: "⚠️ Verificar se já existe pedido emitido com fornecedor" },
+            { desc: "Linha para bordado (8 m)", group: "Linha", brand: "Estrela do Sul", stock: 8, days: "2 dias", suggest: "150 un", status: "🛒 Necessário emitir Pedido de Compra URGENTE" },
+            { desc: "Linha para crochê (200 g)", group: "Linha", brand: "Arte & Fio", stock: 5, days: "1 dia", suggest: "50 un", status: "⚠️ Pedido nº #402 em trânsito com a transportadora" },
+            { desc: "Fio de malha (1 kg)", group: "Fio", brand: "Pontal", stock: 14, days: "4 dias", suggest: "40 un", status: "⚠️ Cotando com fornecedores alternativos" },
+            { desc: "Tesouras de costura 21 cm", group: "Tesoura", brand: "Carmany", stock: 14, days: "4 dias", suggest: "30 un", status: "🛒 Aguardando aprovação financeira" },
+            { desc: "Fita de gorgurão 25 mm", group: "Fita", brand: "Pontal", stock: 14, days: "3 dias", suggest: "80 un", status: "⚠️ Verificar se já existe pedido emitido com fornecedor" }
+        ];
+
+        const highStockData = [
+            { desc: "Botão 4 furos 10 mm", brand: "Riviera", stock: 500, daysOff: "60 dias", value: "R$ 1.250,00", action: "📢 Aplicar Desconto / Promoção no Atacado" },
+            { desc: "Miçanga redonda 4 mm", brand: "Riviera", stock: 1500, daysOff: "90 dias", value: "R$ 3.000,00", action: "📦 Pausar novas compras pelos próximos 3 meses" },
+            { desc: "Ilhós metálico 8 mm", brand: "Pontal", stock: 400, daysOff: "60 dias", value: "R$ 800,00", action: "🔄 Remanejar excesso para a Loja Centro" }
+        ];
+
+        const negativeData = [
+            { desc: "Zíper de Nylon Fixa 18cm", brand: "YKK Aviamentos", stock: -5, cause: "🚨 Venda balcão sem registro prévio de entrada no sistema", action: "🔧 Realizar ajuste fiscal e conferência física" },
+            { desc: "Linha de costura (500 m)", brand: "Elite", stock: 0, cause: "📉 Esgotado total devido ao pico de demanda sem reposição", action: "🛒 Priorizar entrada da nova nota fiscal" }
         ];
 
         document.addEventListener("DOMContentLoaded", () => {
-            const lowStockItems = rawCatalog.filter(i => i.stock <= 15);
-            document.getElementById("lowStockCount").textContent = lowStockItems.length;
+            populatePurchaseTable(lowStockData);
+            populateHighStockTable();
+            populateNegativeTable();
+        });
 
-            const tbody = document.getElementById("modalTableBody");
+        function populatePurchaseTable(data) {
+            const tbody = document.getElementById("purchaseTableBody");
             tbody.innerHTML = "";
-            lowStockItems.forEach(item => {
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-800/40 border-b border-slate-800/60";
-                
-                let badgeClass = item.stock === 0 ? "text-rose-400 bg-rose-500/10 border-rose-500/40" : "text-amber-400 bg-amber-500/10 border-amber-500/40";
 
+            data.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-800/50 border-b border-slate-800";
                 tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-semibold text-slate-200">${item.desc}</td>
-                    <td class="py-2.5 px-3 text-slate-400">${item.brand}</td>
-                    <td class="py-2.5 px-3 text-center">
-                        <span class="px-2 py-0.5 rounded border text-xs font-bold ${badgeClass}">${item.stock}</span>
-                    </td>
-                    <td class="py-2.5 px-3 text-center text-sky-400 font-medium">${item.abc}</td>
+                    <td class="py-3 px-3 font-semibold text-white">${item.desc}</td>
+                    <td class="py-3 px-3 text-slate-300">${item.group} &bull; <span class="text-sky-400">${item.brand}</span></td>
+                    <td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/40">${item.stock}</span></td>
+                    <td class="py-3 px-3 text-center text-rose-400 font-bold">${item.days}</td>
+                    <td class="py-3 px-3 text-center text-emerald-400 font-bold">${item.suggest}</td>
+                    <td class="py-3 px-3 text-slate-200 text-xs">${item.status}</td>
                 `;
                 tbody.appendChild(tr);
             });
-        });
-
-        function openPurchaseModal() {
-            document.getElementById("purchaseModal").classList.remove("hidden");
         }
 
-        function closePurchaseModal() {
-            document.getElementById("purchaseModal").classList.add("hidden");
+        function populateHighStockTable() {
+            const tbody = document.getElementById("highStockTableBody");
+            tbody.innerHTML = "";
+            highStockData.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-800/50 border-b border-slate-800";
+                tr.innerHTML = `
+                    <td class="py-3 px-3 font-semibold text-white">${item.desc}</td>
+                    <td class="py-3 px-3 text-sky-400">${item.brand}</td>
+                    <td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40">${item.stock}</span></td>
+                    <td class="py-3 px-3 text-center text-slate-300">${item.daysOff}</td>
+                    <td class="py-3 px-3 text-right font-extrabold text-emerald-400">${item.value}</td>
+                    <td class="py-3 px-3 text-slate-200">${item.action}</td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
+
+        function populateNegativeTable() {
+            const tbody = document.getElementById("negativeTableBody");
+            tbody.innerHTML = "";
+            negativeData.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-800/50 border-b border-slate-800";
+                const badge = item.stock < 0 ? 'bg-rose-500/20 text-rose-400 border-rose-500/50' : 'bg-slate-800 text-slate-300 border-slate-700';
+                tr.innerHTML = `
+                    <td class="py-3 px-3 font-semibold text-white">${item.desc}</td>
+                    <td class="py-3 px-3 text-sky-400">${item.brand}</td>
+                    <td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded font-bold border ${badge}">${item.stock}</span></td>
+                    <td class="py-3 px-3 text-slate-200">${item.cause}</td>
+                    <td class="py-3 px-3 text-sky-400 font-medium">${item.action}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterPurchaseTable() {
+            const q = document.getElementById("searchPurchase").value.toLowerCase();
+            const filtered = lowStockData.filter(i => i.desc.toLowerCase().includes(q) || i.brand.toLowerCase().includes(q));
+            populatePurchaseTable(filtered);
+        }
+
+        function openPurchaseModal() { document.getElementById("purchaseModal").classList.remove("hidden"); }
+        function openHighStockModal() { document.getElementById("highStockModal").classList.remove("hidden"); }
+        function openNegativeModal() { document.getElementById("negativeModal").classList.remove("hidden"); }
+        function closeModal(id) { document.getElementById(id).classList.add("hidden"); }
     </script>
 </body>
 </html>
