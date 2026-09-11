@@ -14,9 +14,22 @@
             color: #ffffff;
         }
         .card-dark {
-            background-color: #111c2e;
-            border: 1px solid #1e2d42;
-        }
+    background-color: #111c2e;
+    border: 1px solid #1e2d42;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-dark:hover {
+    border-color: #38bdf8;
+    transform: translateY(-3px); /* Faz o card subir levemente */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 189, 248, 0.35); /* Sombra escura de profundidade + Brilho azul */
+}
+
+
+.card-dark:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+}
         .btn-blue-action {
             border: 1.5px solid #38bdf8;
             background-color: rgba(56, 189, 248, 0.08);
@@ -54,25 +67,25 @@
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-emerald-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Valor Investido (Compras)</span>
-                <div class="text-2xl font-extrabold text-white">R$ 48.250,00</div>
+                <div class="text-2xl font-extrabold text-sky-400">R$ 48.250,00</div>
                 <p class="text-xs text-white">Total em mercadorias adquiridas</p>
             </div>
 
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-sky-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Valor Faturado (Saídas)</span>
-                <div class="text-2xl font-extrabold text-white">R$ 82.190,00</div>
+                <div class="text-2xl font-extrabold text-sky-400">R$ 82.190,00</div>
                 <p class="text-xs text-white">Total faturado no período</p>
             </div>
 
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-indigo-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Lucro Bruto</span>
-                <div class="text-2xl font-extrabold text-white">R$ 33.940,00</div>
+                <div class="text-2xl font-extrabold text-sky-400">R$ 33.940,00</div>
                 <p class="text-xs text-white">Margem operacional direta</p>
             </div>
 
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-amber-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Maior Receptor</span>
-                <div class="text-2xl font-extrabold text-white">Loja Centro</div>
+                <div class="text-2xl font-extrabold text-sky-400">Loja Centro</div>
                 <p class="text-xs text-white">38% da movimentação total</p>
             </div>
         </section>
@@ -93,7 +106,7 @@
                 <div class="space-y-2">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-white">Alerta de Estoque Baixo</h3>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-extrabold text-white">12</span>
+                        <span class="text-4xl font-extrabold text-amber-500">12</span>
                         <span class="text-xl font-bold text-white">produtos</span>
                     </div>
                     <p class="text-xs text-white">Abaixo da média ou do nível mínimo de segurança (&le; 15 un).</p>
@@ -112,7 +125,7 @@
                 <div class="space-y-2">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-white">Alerta de Estoque Alto</h3>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-extrabold text-white">8</span>
+                        <span class="text-4xl font-extrabold text-amber-500">12</span>
                         <span class="text-xl font-bold text-white">produtos</span>
                     </div>
                     <p class="text-xs text-white">Acima da média planejada ou sem giro recente (&gt; 50 un).</p>
@@ -131,7 +144,7 @@
                 <div class="space-y-2">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-white">Estoque Negativo / Esgotado</h3>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-extrabold text-white">2</span>
+                        <span class="text-4xl font-extrabold text-amber-500">12</span>
                         <span class="text-xl font-bold text-white">produtos</span>
                     </div>
                     <p class="text-xs text-white">Divergência física ou falha no registro de entrada.</p>
@@ -174,13 +187,7 @@
                     <p class="text-xs text-white">
                         Total de <strong class="text-sky-400 font-extrabold text-sm">2.110</strong> unidades expedidas no período.
                     </p>
-                    <div class="flex flex-wrap gap-1.5 pt-1">
-                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Santa Clara</span>
-                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Pinheiros</span>
-                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Sol Azul</span>
-                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Loja Centro</span>
-                        <span class="text-3xs bg-slate-800 text-slate-200 px-2 py-0.5 rounded border border-slate-700">Reposição</span>
-                    </div>
+                    
                 </div>
                 <div>
                     <button onclick="alert('Página de Saída por Lojas')" class="btn-blue-action py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2">
