@@ -1,231 +1,299 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo de Estoque — Aviamento</title>
-<style>
-  :root {
-    --bg: #0a1420;
-    --card: #101f30;
-    --card-border: #1c3350;
-    --cyan: #38bdf8;
-    --cyan-soft: #7dd3fc;
-    --green: #34d399;
-    --red: #f87171;
-    --yellow: #fbbf24;
-    --text: #e5edf5;
-    --muted: #7d93ac;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-    padding: 28px;
-  }
-  .wrap { max-width: 1400px; margin: 0 auto; }
-
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 18px;
-    margin-bottom: 22px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .brand { display: flex; align-items: baseline; gap: 14px; }
-  h1 { font-size: 26px; margin: 0; font-weight: 700; }
-  .brand .period { color: var(--muted); font-size: 14px; }
-  
-  nav.tabs { display: flex; gap: 8px; }
-  nav.tabs a {
-    background: transparent;
-    border: 1px solid var(--card-border);
-    color: var(--muted);
-    padding: 9px 18px;
-    border-radius: 6px;
-    font-size: 14px;
-    text-decoration: none;
-  }
-  nav.tabs a.active {
-    color: var(--cyan-soft);
-    border-color: var(--cyan);
-    background: rgba(56,189,248,0.08);
-  }
-
-  /* Filtros Não Digitáveis */
-  .table-controls {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 18px;
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    padding: 16px;
-    border-radius: 8px;
-    align-items: center;
-  }
-  .filter-group { display: flex; align-items: center; gap: 10px; }
-  .filter-group label { font-size: 13.5px; color: var(--cyan-soft); font-weight: 600; }
-  select {
-    background: #06121f;
-    border: 1px solid var(--card-border);
-    color: var(--text);
-    padding: 9px 16px;
-    border-radius: 6px;
-    font-size: 13.5px;
-    outline: none;
-    cursor: pointer;
-  }
-  select:focus { border-color: var(--cyan); }
-
-  .table-panel {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 20px 22px;
-  }
-  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-  thead th {
-    text-align: left;
-    color: var(--cyan-soft);
-    font-weight: 600;
-    padding: 10px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  tbody td {
-    padding: 11px 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-  tbody tr:hover { background: rgba(56,189,248,0.05); }
-
-  .tag {
-    display: inline-block;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-weight: 600;
-    border: 1px solid currentColor;
-  }
-  .tag.red { color: var(--red); }
-  .tag.yellow { color: var(--yellow); }
-  .tag.green { color: var(--green); }
-  .tag.cyan { color: var(--cyan-soft); }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Gestão de Estoque — Aviamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1320;
+            color: #e2e8f0;
+        }
+        .card-dark {
+            background-color: #111c2e;
+            border: 1px solid #1e2d42;
+        }
+        .table-header {
+            color: #38bdf8;
+            border-bottom: 1px solid #1e2d42;
+        }
+        .filter-btn {
+            background-color: #1e2d4a;
+            color: #94a3b8;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #0284c7;
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body>
-<div class="wrap">
+<body class="min-h-screen flex flex-col p-4 sm:p-8">
 
-  <header>
-    <div class="brand">
-      <h1>Painel de Gestão de Estoque — Aviamento</h1>
-      <span class="period">Agosto 2026</span>
-    </div>
-    <nav class="tabs">
-      <a href="index.html">Visão Geral</a>
-      <a href="estoque.html" class="active">Tabela de Produtos</a>
-    </nav>
-  </header>
+    <!-- Header -->
+    <header class="max-w-7xl w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+        <div>
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-3">
+                Painel de Gestão de Estoque — Aviamento
+                <span class="text-xs font-normal text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">Agosto 2026</span>
+            </h1>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="index.html" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800/60 text-slate-300 border border-slate-700 hover:bg-slate-700 transition">Visão Geral</a>
+            <a href="estoque.html" class="px-4 py-2 text-xs font-semibold rounded-lg bg-sky-600 text-white border border-sky-500 shadow-lg shadow-sky-900/30">Tabela de Produtos</a>
+        </div>
+    </header>
 
-  <!-- Filtros Suspensos (Menu Não Digitável) -->
-  <div class="table-controls">
-    <div class="filter-group">
-      <label for="filtro-grupo">Filtrar por Grupo:</label>
-      <select id="filtro-grupo" onchange="filtrar()">
-        <option value="todos">Todos os Grupos</option>
-        <option value="Linha">Linha</option>
-        <option value="Fio">Fio</option>
-        <option value="Barbante">Barbante</option>
-        <option value="Zíper">Zíper</option>
-        <option value="Elástico">Elástico</option>
-      </select>
-    </div>
+    <!-- Main Content -->
+    <main class="max-w-7xl w-full mx-auto space-y-6">
 
-    <div class="filter-group">
-      <label for="filtro-marca">Filtrar por Marca / Fornecedor:</label>
-      <select id="filtro-marca" onchange="filtrar()">
-        <option value="todos">Todas as Marcas</option>
-        <option value="Coats Corrente">Coats Corrente</option>
-        <option value="YKK Aviamentos">YKK Aviamentos</option>
-        <option value="Zanotti Elásticos">Zanotti Elásticos</option>
-        <option value="Canoas Cordões">Canoas Cordões</option>
-      </select>
-    </div>
-  </div>
+        <!-- Área de Filtros -->
+        <section class="card-dark p-5 rounded-xl space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-sky-400 flex items-center gap-2">
+                        <i class="fa-solid fa-filter text-xs"></i> Filtrar por
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Selecione uma opção rápida para refinar a exibição da tabela</p>
+                </div>
 
-  <div class="table-panel">
-    <table>
-      <thead>
-        <tr>
-          <th>Descrição</th>
-          <th>Grupo</th>
-          <th>Marca / Fornecedor</th>
-          <th>Estoque</th>
-          <th>Curva ABC</th>
-          <th>Último Receb.</th>
-          <th>Dias de Venda</th>
-        </tr>
-      </thead>
-      <tbody id="corpo-tabela">
-        <!-- Preenchido dinamicamente pelo JavaScript -->
-      </tbody>
-    </table>
-  </div>
-</div>
+                <!-- Campo de Busca Digitando -->
+                <div class="relative w-full md:w-80">
+                    <input type="text" id="searchInput" onkeyup="applyFilters()" placeholder="Buscar por descrição ou fornecedor..." 
+                           class="w-full bg-slate-900/80 text-xs text-slate-200 placeholder-slate-500 rounded-lg border border-slate-700 pl-9 pr-4 py-2.5 focus:outline-none focus:border-sky-500 transition">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500 text-xs"></i>
+                </div>
+            </div>
 
-<script>
-const produtos = [
-  { nome: "Linha Poliéster Cone 5000m (Branca)", grupo: "Linha", marca: "Coats Corrente", est: 12, abc: "A", ult: "12/08/2026", dias: "3 dias (🔴 Crítico)" },
-  { nome: "Linha Poliéster Cone 5000m (Preta)", grupo: "Linha", marca: "Coats Corrente", est: 8, abc: "A", ult: "10/08/2026", dias: "2 dias (🔴 Crítico)" },
-  { nome: "Fio de Overlock / Nylon 100g (Cru)", grupo: "Fio", marca: "Coats Corrente", est: 45, abc: "B", ult: "22/08/2026", dias: "25 dias" },
-  { nome: "Fio de Pesponto 80m (Azul Marinho)", grupo: "Fio", marca: "Coats Corrente", est: 18, abc: "C", ult: "05/07/2026", dias: "5 dias (🔴 Crítico)" },
-  { nome: "Zíper de Nylon Fixa 18cm (Preto)", grupo: "Zíper", marca: "YKK Aviamentos", est: -5, abc: "A", ult: "01/08/2026", dias: "0 dias (⚠️ Negativo)" },
-  { nome: "Zíper Invisível 50cm (Branco)", grupo: "Zíper", marca: "YKK Aviamentos", est: 15, abc: "A", ult: "15/08/2026", dias: "4 dias (🔴 Crítico)" },
-  { nome: "Elástico Chato 20mm Rolo 50m (Branco)", grupo: "Elástico", marca: "Zanotti Elásticos", est: 3, abc: "A", ult: "20/08/2026", dias: "2 dias (🔴 Crítico)" },
-  { nome: "Cordão de Algodão 4mm Rolo 100m (Natural)", grupo: "Barbante", marca: "Canoas Cordões", est: 6, abc: "B", ult: "11/08/2026", dias: "4 dias (🔴 Crítico)" },
-  { nome: "Barbante 8 Fios Rolo 400g (Cru)", grupo: "Barbante", marca: "Canoas Cordões", est: 35, abc: "C", ult: "25/08/2026", dias: "45 dias" }
-];
+            <!-- Botões de Filtros (Grupo, Marca, Estoque Baixo, Estoque Alto) -->
+            <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/80">
+                <button onclick="setFilter('all')" id="btn-all" class="filter-btn active text-xs font-medium px-3 py-1.5 rounded-lg">
+                    Todos os Produtos
+                </button>
+                <div class="h-5 w-px bg-slate-800 my-auto mx-1"></div>
+                
+                <select id="selectGroup" onchange="applyFilters()" class="bg-slate-900/90 text-xs text-slate-300 border border-slate-700 rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500">
+                    <option value="">Grupo (Todos)</option>
+                </select>
 
-function renderizar(lista) {
-  const tbody = document.getElementById('corpo-tabela');
-  tbody.innerHTML = '';
-  
-  lista.forEach(p => {
-    let tagEstoque = `<span class="tag ${p.est < 0 ? 'red' : p.est < 20 ? 'yellow' : 'green'}">${p.est}</span>`;
-    
-    tbody.innerHTML += `
-      <tr>
-        <td><b>${p.nome}</b></td>
-        <td>${p.grupo}</td>
-        <td>${p.marca}</td>
-        <td>${tagEstoque}</td>
-        <td><span class="tag cyan">Classe ${p.abc}</span></td>
-        <td>${p.ult}</td>
-        <td>${p.dias}</td>
-      </tr>
-    `;
-  });
-}
+                <select id="selectBrand" onchange="applyFilters()" class="bg-slate-900/90 text-xs text-slate-300 border border-slate-700 rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500">
+                    <option value="">Marca / Fornecedor (Todas)</option>
+                </select>
 
-function filtrar() {
-  const grupo = document.getElementById('filtro-grupo').value;
-  const marca = document.getElementById('filtro-marca').value;
+                <div class="h-5 w-px bg-slate-800 my-auto mx-1"></div>
 
-  let resultado = produtos;
+                <button onclick="setFilter('low')" id="btn-low" class="filter-btn text-xs font-medium px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span> Estoque Baixo (&le; 15)
+                </button>
+                <button onclick="setFilter('high')" id="btn-high" class="filter-btn text-xs font-medium px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Estoque Alto (&gt; 15)
+                </button>
+            </div>
+        </section>
 
-  if (grupo !== 'todos') {
-    resultado = resultado.filter(p => p.grupo === grupo);
-  }
-  if (marca !== 'todos') {
-    resultado = resultado.filter(p => p.marca === marca);
-  }
+        <!-- Tabela de Produtos -->
+        <section class="card-dark rounded-xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-slate-900/80 uppercase text-xs font-semibold tracking-wider table-header">
+                        <tr>
+                            <th scope="col" class="py-3.5 px-4">Descrição</th>
+                            <th scope="col" class="py-3.5 px-4">Grupo</th>
+                            <th scope="col" class="py-3.5 px-4">Marca / Fornecedor</th>
+                            <th scope="col" class="py-3.5 px-4 text-center">Estoque</th>
+                            <th scope="col" class="py-3.5 px-4 text-center">Curva ABC</th>
+                            <th scope="col" class="py-3.5 px-4">Último Receb.</th>
+                            <th scope="col" class="py-3.5 px-4">Dias de Venda</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody" class="divide-y divide-slate-800/60 font-normal">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="p-3 bg-slate-900/50 border-t border-slate-800 text-xs text-slate-400 flex justify-between items-center">
+                <span>Exibindo <strong id="visibleCount" class="text-sky-400">0</strong> de <strong id="totalCount" class="text-slate-200">0</strong> itens cadastrados</span>
+            </div>
+        </section>
 
-  renderizar(resultado);
-}
+    </main>
 
-// Inicializa a tabela
-renderizar(produtos);
-</script>
+    <!-- Script de Gestão dos Dados -->
+    <script>
+        const rawCatalog = [
+            // Linhas e fios
+            { desc: "Linha de costura (100 m)", group: "Linha", brand: "Riviera", stock: 120, abc: "Classe A", date: "12/08/2026", days: "25 dias" },
+            { desc: "Linha de costura (500 m)", group: "Linha", brand: "Riviera", stock: 45, abc: "Classe A", date: "10/08/2026", days: "12 dias" },
+            { desc: "Linha de costura (100 m)", group: "Linha", brand: "Pontal", stock: 80, abc: "Classe B", date: "05/08/2026", days: "18 dias" },
+            { desc: "Linha de costura (500 m)", group: "Linha", brand: "Generosa", stock: 12, abc: "Classe A", date: "20/08/2026", days: "3 dias (🔴 Crítico)" },
+            { desc: "Linha de costura (1.000 m)", group: "Linha", brand: "Zavini", stock: 30, abc: "Classe A", date: "15/08/2026", days: "8 dias" },
+            { desc: "Linha de costura (500 m)", group: "Linha", brand: "Elite", stock: 0, abc: "Classe A", date: "01/08/2026", days: "0 dias (⚠️ Esgotado)" },
+            { desc: "Linha de costura (1.000 m)", group: "Linha", brand: "Nova Aurora", stock: 25, abc: "Classe B", date: "18/08/2026", days: "6 dias" },
+            { desc: "Linha de costura (200 m)", group: "Linha", brand: "Carmany", stock: 95, abc: "Classe C", date: "22/08/2026", days: "30 dias" },
+
+            { desc: "Linha para bordado (8 m)", group: "Linha", brand: "Ponto a Ponto", stock: 150, abc: "Classe A", date: "25/08/2026", days: "40 dias" },
+            { desc: "Linha para bordado (8 m)", group: "Linha", brand: "Bela Linha", stock: 60, abc: "Classe B", date: "14/08/2026", days: "15 dias" },
+            { desc: "Linha para bordado (8 m)", group: "Linha", brand: "Estrela do Sul", stock: 8, abc: "Classe C", date: "02/08/2026", days: "2 dias (🔴 Crítico)" },
+            { desc: "Linha para bordado (20 m)", group: "Linha", brand: "Fio Nobre", stock: 40, abc: "Classe B", date: "11/08/2026", days: "10 dias" },
+            { desc: "Linha para bordado (20 m)", group: "Linha", brand: "Nova Aurora", stock: 35, abc: "Classe B", date: "19/08/2026", days: "9 dias" },
+
+            { desc: "Linha para crochê (125 g)", group: "Linha", brand: "Pontal", stock: 50, abc: "Classe A", date: "20/08/2026", days: "14 dias" },
+            { desc: "Linha para crochê (200 g)", group: "Linha", brand: "Generosa", stock: 18, abc: "Classe A", date: "13/08/2026", days: "5 dias (🔴 Crítico)" },
+            { desc: "Linha para crochê (500 g)", group: "Linha", brand: "Carmany", stock: 22, abc: "Classe B", date: "21/08/2026", days: "7 dias" },
+            { desc: "Linha para crochê (200 g)", group: "Linha", brand: "Arte & Fio", stock: 5, abc: "Classe C", date: "04/08/2026", days: "1 dia (🔴 Crítico)" },
+
+            { desc: "Barbante (200 g)", group: "Barbante", brand: "Generosa", stock: 110, abc: "Classe B", date: "24/08/2026", days: "35 dias" },
+            { desc: "Barbante (400 g)", group: "Barbante", brand: "Ponto a Ponto", stock: 40, abc: "Classe C", date: "10/08/2026", days: "12 dias" },
+            { desc: "Fio de malha (500 g)", group: "Fio", brand: "Riviera", stock: 22, abc: "Classe B", date: "17/08/2026", days: "8 dias" },
+            { desc: "Fio de malha (1 kg)", group: "Fio", brand: "Pontal", stock: 14, abc: "Classe A", date: "19/08/2026", days: "4 dias (🔴 Crítico)" },
+
+            // Costura
+            { desc: "Agulhas de mão (10 un)", group: "Agulha", brand: "Riviera", stock: 90, abc: "Classe A", date: "22/08/2026", days: "30 dias" },
+            { desc: "Agulhas para máquina Nº 14", group: "Agulha", brand: "Carmany", stock: 50, abc: "Classe A", date: "15/08/2026", days: "15 dias" },
+            { desc: "Alfinetes 28 mm (50 un)", group: "Alfinete", brand: "Pontal", stock: 65, abc: "Classe B", date: "11/08/2026", days: "20 dias" },
+            { desc: "Tesouras de costura 21 cm", group: "Tesoura", brand: "Carmany", stock: 14, abc: "Classe A", date: "23/08/2026", days: "4 dias (🔴 Crítico)" },
+            { desc: "Fita métrica 1,5 m", group: "Medição", brand: "Zavini", stock: 100, abc: "Classe C", date: "25/08/2026", days: "45 dias" },
+
+            // Elásticos e Fitas
+            { desc: "Elástico roliço 2 mm (10 m)", group: "Elástico", brand: "Riviera", stock: 50, abc: "Classe A", date: "16/08/2026", days: "15 dias" },
+            { desc: "Elástico chato 10 mm (10 m)", group: "Elástico", brand: "Nova Aurora", stock: 42, abc: "Classe A", date: "18/08/2026", days: "11 dias" },
+            { desc: "Fita de cetim 15 mm (10 m)", group: "Fita", brand: "Riviera", stock: 20, abc: "Classe B", date: "09/08/2026", days: "6 dias" },
+            { desc: "Fita de gorgurão 25 mm (10 m)", group: "Fita", brand: "Pontal", stock: 14, abc: "Classe B", date: "12/08/2026", days: "3 dias (🔴 Crítico)" },
+
+            // Botões
+            { desc: "Botão 4 furos 10 mm", group: "Botão", brand: "Riviera", stock: 500, abc: "Classe A", date: "26/08/2026", days: "60 dias" },
+            { desc: "Botão 4 furos 15 mm", group: "Botão", brand: "Pontal", stock: 350, abc: "Classe A", date: "24/08/2026", days: "50 dias" },
+            { desc: "Botão de madeira 20 mm", group: "Botão", brand: "Carmany", stock: 95, abc: "Classe B", date: "10/08/2026", days: "25 dias" },
+            { desc: "Botão decorativo 25 mm", group: "Botão", brand: "Riviera", stock: 13, abc: "Classe C", date: "08/08/2026", days: "3 dias (🔴 Crítico)" },
+
+            // Zíperes
+            { desc: "Zíper comum 15 cm", group: "Zíper", brand: "Riviera", stock: 110, abc: "Classe A", date: "20/08/2026", days: "30 dias" },
+            { desc: "Zíper invisível 25 cm", group: "Zíper", brand: "Carmany", stock: 50, abc: "Classe A", date: "15/08/2026", days: "14 dias" },
+            { desc: "Zíper metálico 20 cm", group: "Zíper", brand: "Riviera", stock: 33, abc: "Classe B", date: "18/08/2026", days: "9 dias" },
+            { desc: "Cursor para zíper Nº 5", group: "Zíper", brand: "Riviera", stock: 180, abc: "Classe A", date: "25/08/2026", days: "40 dias" },
+
+            // Colchetes e Fechos
+            { desc: "Colchete para costura 8 mm", group: "Fecho", brand: "Riviera", stock: 250, abc: "Classe C", date: "12/08/2026", days: "50 dias" },
+            { desc: "Fecho magnético 14 mm", group: "Fecho", brand: "Zavini", stock: 75, abc: "Classe B", date: "17/08/2026", days: "20 dias" },
+            { desc: "Ilhós metálico 8 mm", group: "Fecho", brand: "Pontal", stock: 400, abc: "Classe A", date: "22/08/2026", days: "60 dias" },
+
+            // Artesanato e Decoração
+            { desc: "Miçanga redonda 4 mm", group: "Artesanato", brand: "Riviera", stock: 1500, abc: "Classe A", date: "26/08/2026", days: "90 dias" },
+            { desc: "Pérola artificial 8 mm", group: "Artesanato", brand: "Elite", stock: 400, abc: "Classe A", date: "21/08/2026", days: "45 dias" },
+            { desc: "Strass adesivo 5 mm", group: "Artesanato", brand: "Riviera", stock: 30, abc: "Classe B", date: "05/08/2026", days: "8 dias" },
+
+            // Crochê e Tricô
+            { desc: "Agulha de crochê 2,0 mm", group: "Crochê/Tricô", brand: "Riviera", stock: 55, abc: "Classe B", date: "14/08/2026", days: "15 dias" },
+            { desc: "Agulha de tricô 4,5 mm", group: "Crochê/Tricô", brand: "Carmany", stock: 22, abc: "Classe B", date: "19/08/2026", days: "7 dias" },
+
+            // Aviamentos para Roupas
+            { desc: "Entretela termocolante 1 m", group: "Aviamento Roupas", brand: "Riviera", stock: 60, abc: "Classe A", date: "22/08/2026", days: "18 dias" },
+            { desc: "Manta acrílica 1 m", group: "Aviamento Roupas", brand: "Elite", stock: 45, abc: "Classe A", date: "15/08/2026", days: "12 dias" },
+
+            // Colas e Auxiliares
+            { desc: "Cola para tecido 35 g", group: "Cola", brand: "Riviera", stock: 85, abc: "Classe A", date: "20/08/2026", days: "22 dias" },
+            { desc: "Cola quente 7 mm (10 un)", group: "Cola", brand: "Elite", stock: 120, abc: "Classe B", date: "24/08/2026", days: "30 dias" },
+
+            // Materiais de apoio
+            { desc: "Caixa organizadora 500 ml", group: "Apoio", brand: "Riviera", stock: 40, abc: "Classe C", date: "10/08/2026", days: "15 dias" },
+            { desc: "Expositor de aviamentos 50 cm", group: "Apoio", brand: "Riviera", stock: 3, abc: "Classe C", date: "02/08/2026", days: "1 dia (🔴 Crítico)" }
+        ];
+
+        let currentStockFilter = 'all';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            populateSelectOptions();
+            applyFilters();
+        });
+
+        function populateSelectOptions() {
+            const groups = [...new Set(rawCatalog.map(item => item.group))].sort();
+            const brands = [...new Set(rawCatalog.map(item => item.brand))].sort();
+
+            const selectGroup = document.getElementById("selectGroup");
+            groups.forEach(g => {
+                const opt = document.createElement("option");
+                opt.value = g;
+                opt.textContent = g;
+                selectGroup.appendChild(opt);
+            });
+
+            const selectBrand = document.getElementById("selectBrand");
+            brands.forEach(b => {
+                const opt = document.createElement("option");
+                opt.value = b;
+                opt.textContent = b;
+                selectBrand.appendChild(opt);
+            });
+        }
+
+        function setFilter(type) {
+            currentStockFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${type}`).classList.add('active');
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchVal = document.getElementById("searchInput").value.toLowerCase();
+            const selectedGroup = document.getElementById("selectGroup").value;
+            const selectedBrand = document.getElementById("selectBrand").value;
+
+            const filtered = rawCatalog.filter(item => {
+                const matchSearch = item.desc.toLowerCase().includes(searchVal) || item.brand.toLowerCase().includes(searchVal);
+                const matchGroup = selectedGroup === "" || item.group === selectedGroup;
+                const matchBrand = selectedBrand === "" || item.brand === selectedBrand;
+                
+                let matchStock = true;
+                if (currentStockFilter === 'low') matchStock = item.stock <= 15;
+                if (currentStockFilter === 'high') matchStock = item.stock > 15;
+
+                return matchSearch && matchGroup && matchBrand && matchStock;
+            });
+
+            renderTable(filtered);
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById("productTableBody");
+            tbody.innerHTML = "";
+
+            data.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-800/40 transition-colors border-b border-slate-800/60";
+
+                let stockBadgeClass = "border-slate-700 text-slate-300";
+                if (item.stock === 0) stockBadgeClass = "border-rose-500/50 text-rose-400 bg-rose-500/10";
+                else if (item.stock <= 15) stockBadgeClass = "border-amber-500/50 text-amber-400 bg-amber-500/10";
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-slate-100">${item.desc}</td>
+                    <td class="py-3 px-4 text-slate-400">${item.group}</td>
+                    <td class="py-3 px-4 text-slate-300">${item.brand}</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="inline-block px-2.5 py-0.5 rounded-full border text-xs font-semibold ${stockBadgeClass}">
+                            ${item.stock}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="px-2 py-0.5 rounded border border-sky-500/30 text-sky-400 text-3xs font-medium">
+                            ${item.abc}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-400">${item.date}</td>
+                    <td class="py-3 px-4 text-slate-300 font-medium">${item.days}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById("visibleCount").textContent = data.length;
+            document.getElementById("totalCount").textContent = rawCatalog.length;
+        }
+    </script>
 </body>
 </html>
