@@ -14,22 +14,15 @@
             color: #ffffff;
         }
         .card-dark {
-    background-color: #111c2e;
-    border: 1px solid #1e2d42;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-dark:hover {
-    border-color: #38bdf8;
-    transform: translateY(-3px); /* Faz o card subir levemente */
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 189, 248, 0.35); /* Sombra escura de profundidade + Brilho azul */
-}
-
-
-.card-dark:hover {
-    border-color: #38bdf8;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
-}
+            background-color: #111c2e;
+            border: 1px solid #1e2d42;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-dark:hover {
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 18px rgba(56, 189, 248, 0.35);
+        }
         .btn-blue-action {
             border: 1.5px solid #38bdf8;
             background-color: rgba(56, 189, 248, 0.08);
@@ -42,16 +35,23 @@
             border-color: #38bdf8;
             box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
         }
+        /* Estilo para relatórios de impressão em PDF/Visualização limpa */
+        @media print {
+            body * { visibility: hidden; }
+            .print-area, .print-area * { visibility: visible; }
+            .print-area { position: absolute; left: 0; top: 0; width: 100%; color: #000 !important; background: #fff !important; }
+            .no-print { display: none !important; }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col p-4 sm:p-8 w-full">
 
-    <!-- Header Expandido -->
-    <header class="w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <!-- Header Centralizado com Largura de ~2 Dedos nas Bordas -->
+    <header class="max-w-6xl w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-3">
                 Painel Analítico de Estoque
-                <span class="text-xs font-normal text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">Setembro 2026</span>
+                <span class="text-xs font-semibold text-slate-200 bg-slate-800 px-3 py-1 rounded-md border border-slate-700">Agosto 2026</span>
             </h1>
         </div>
         <div class="flex items-center gap-2">
@@ -60,41 +60,45 @@
         </div>
     </header>
 
-    <!-- Main Content Full Width -->
-    <main class="w-full mx-auto space-y-6">
+    <!-- Main Content Container (max-w-6xl para manter o tamanho original das bordas) -->
+    <main class="max-w-6xl w-full mx-auto space-y-6">
 
-        <!-- CARDS FINANCEIROS (TOPO) -->
+        <!-- CARDS FINANCEIROS -->
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-emerald-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Valor Investido (Compras)</span>
                 <div class="text-2xl font-extrabold text-sky-400">R$ 48.250,00</div>
-                <p class="text-xs text-white">Total em mercadorias adquiridas</p>
+                <p class="text-xs text-slate-300">Total em mercadorias adquiridas</p>
             </div>
 
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-sky-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Valor Faturado (Saídas)</span>
                 <div class="text-2xl font-extrabold text-sky-400">R$ 82.190,00</div>
-                <p class="text-xs text-white">Total faturado no período</p>
+                <p class="text-xs text-slate-300">Total faturado no período</p>
             </div>
 
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-indigo-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Lucro Bruto</span>
                 <div class="text-2xl font-extrabold text-sky-400">R$ 33.940,00</div>
-                <p class="text-xs text-white">Margem operacional direta</p>
+                <p class="text-xs text-slate-300">Margem operacional direta</p>
             </div>
 
             <div class="card-dark p-5 rounded-xl border-l-4 border-l-amber-500 space-y-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Maior Receptor</span>
                 <div class="text-2xl font-extrabold text-sky-400">Loja Centro</div>
-                <p class="text-xs text-white">38% da movimentação total</p>
+                <p class="text-xs text-slate-300">38% da movimentação total</p>
             </div>
         </section>
 
         <!-- Banner de Tendência Sazonal -->
         <section class="card-dark p-4 rounded-xl border-l-4 border-l-sky-500 flex items-center gap-3 text-sm">
             <span class="text-lg">📅</span>
-            <p class="text-white">
-                <strong class="text-sky-400">Tendência Sazonal de Setembro:</strong> Aumento projetado de <strong class="text-sky-400">+35%</strong> na procura do grupo <strong class="text-white">BARBANTES & CORDEIROS</strong> para a linha de Primavera.
+            <p class="text-white text-sm">
+                <strong class="text-sky-400">Tendência Sazonal de Agosto:</strong> Aumento projetado de 
+                <strong class="text-emerald-400 inline-flex items-center gap-1 font-bold">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +35%
+                </strong> 
+                na procura do grupo <strong class="text-white">BARBANTES & CORDEIROS</strong> para a linha de Inverno.
             </p>
         </section>
 
@@ -104,16 +108,16 @@
             <!-- Card 1: Estoque Baixo -->
             <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
                 <div class="space-y-2">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Alerta de Estoque Baixo</h3>
+                    <h3 class="text-base font-bold uppercase tracking-wider text-white">Alerta de Estoque Baixo</h3>
                     <div class="flex items-baseline gap-2">
                         <span class="text-4xl font-extrabold text-amber-500">12</span>
-                        <span class="text-xl font-bold text-white">produtos</span>
+                        <span class="text-xl font-bold text-amber-500">produtos</span>
                     </div>
-                    <p class="text-xs text-white">Abaixo da média ou do nível mínimo de segurança (&le; 15 un).</p>
+                    <p class="text-xs text-slate-300">Produtos com cobertura inferior a 14 dias de venda.</p>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="openPurchaseModal()" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+                    <button onclick="openModal('purchaseModal')" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
                         <i class="fa-solid fa-list-check text-base"></i>
                         <span>Ver sugestão de compras</span>
                     </button>
@@ -123,16 +127,16 @@
             <!-- Card 2: Estoque Alto -->
             <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
                 <div class="space-y-2">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Alerta de Estoque Alto</h3>
+                    <h3 class="text-base font-bold uppercase tracking-wider text-white">Alerta de Estoque Alto</h3>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-extrabold text-amber-500">12</span>
-                        <span class="text-xl font-bold text-white">produtos</span>
+                        <span class="text-4xl font-extrabold text-amber-500">3</span>
+                        <span class="text-xl font-bold text-amber-500">produtos</span>
                     </div>
-                    <p class="text-xs text-white">Acima da média planejada ou sem giro recente (&gt; 50 un).</p>
+                    <p class="text-xs text-slate-300">Acima da média planejada ou sem giro recente (> 50 un).</p>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="openHighStockModal()" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+                    <button onclick="openModal('highStockModal')" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
                         <i class="fa-solid fa-boxes-stacked text-base"></i>
                         <span>Ver capital preso</span>
                     </button>
@@ -142,16 +146,16 @@
             <!-- Card 3: Estoque Negativo / Zerado -->
             <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
                 <div class="space-y-2">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Estoque Negativo / Esgotado</h3>
+                    <h3 class="text-base font-bold uppercase tracking-wider text-white">Estoque Negativo / Esgotado</h3>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-extrabold text-amber-500">12</span>
-                        <span class="text-xl font-bold text-white">produtos</span>
+                        <span class="text-4xl font-extrabold text-amber-500">2</span>
+                        <span class="text-xl font-bold text-amber-500">produtos</span>
                     </div>
-                    <p class="text-xs text-white">Divergência física ou falha no registro de entrada.</p>
+                    <p class="text-xs text-slate-300">Divergência física ou falha no registro de entrada.</p>
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="openNegativeModal()" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+                    <button onclick="openModal('negativeModal')" class="btn-blue-action w-full py-3 px-4 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
                         <i class="fa-solid fa-triangle-exclamation text-base"></i>
                         <span>Auditar divergências</span>
                     </button>
@@ -163,36 +167,41 @@
         <!-- GRID SECUNDÁRIO DE RECEBIMENTO E SAÍDA -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <!-- Recebimento no Mês -->
+            <!-- Recebimento no Mês (Agosto) -->
             <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
                 <div class="space-y-2">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Recebimento no Mês</h3>
-                    <div class="text-3xl font-extrabold text-white">8 SKUs</div>
-                    <p class="text-xs text-white">
-                        Total de <strong class="text-sky-400 font-extrabold text-sm">1.820</strong> unidades recebidas no período.
+                    <h3 class="text-base font-bold uppercase tracking-wider text-white">Recebimento no Mês (Agosto)</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-3xl font-extrabold text-amber-500">8</span>
+                        <span class="text-xl font-bold text-amber-500">SKUs</span>
+                    </div>
+                    <p class="text-xs text-slate-300">
+                        Total de <strong class="text-sky-400 font-extrabold text-sm">1.820</strong> unidades recebidas no período de Agosto.
                     </p>
                 </div>
                 <div>
-                    <button onclick="alert('Página de Entrada de Mercadorias')" class="btn-blue-action py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2">
+                    <button onclick="openModal('receiptModal')" class="btn-blue-action py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2">
                         <i class="fa-solid fa-truck-ramp-box"></i> Detalhes do Recebimento
                     </button>
                 </div>
             </div>
 
-            <!-- Saída de Mercadoria (com as Lojas) -->
+            <!-- Saída de Mercadoria -->
             <div class="card-dark p-6 rounded-xl flex flex-col justify-between space-y-4">
                 <div class="space-y-2">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-white">Saída de Mercadoria</h3>
-                    <div class="text-3xl font-extrabold text-white">12 SKUs</div>
-                    <p class="text-xs text-white">
+                    <h3 class="text-base font-bold uppercase tracking-wider text-white">Saída de Mercadoria (Agosto)</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-3xl font-extrabold text-amber-500">12</span>
+                        <span class="text-xl font-bold text-amber-500">SKUs</span>
+                    </div>
+                    <p class="text-xs text-slate-300">
                         Total de <strong class="text-sky-400 font-extrabold text-sm">2.110</strong> unidades expedidas no período.
                     </p>
-                    
                 </div>
                 <div>
-                    <button onclick="alert('Página de Saída por Lojas')" class="btn-blue-action py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2">
+                    <a href="saidas.html" class="btn-blue-action py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2">
                         <i class="fa-solid fa-store"></i> Detalhes da Expedição por Loja
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -200,42 +209,42 @@
 
     </main>
 
-    <!-- MODAL DEDICADO 1: SUGESTÃO DE COMPRAS (ESTOQUE BAIXO) -->
+    <!-- MODAL 1: SUGESTÃO DE COMPRAS (ESTOQUE BAIXO) -->
     <div id="purchaseModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
-        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-sky-500/40">
+        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-sky-500/40 print-area">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-list-check text-sky-400 text-xl"></i>
                     <div>
-                        <h3 class="text-base font-bold text-white">Gestão de Reposição & Compras (&le; 15 un)</h3>
+                        <h3 class="text-base font-bold text-white">Gestão de Reposição & Compras (&lt; 14 Dias de Venda)</h3>
                         <p class="text-xs text-slate-300">Análise de cobertura e verificação de pedidos em aberto</p>
                     </div>
                 </div>
-                <button onclick="closeModal('purchaseModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="exportToFormattedReport('purchaseTableBody', 'Relatório de Sugestão de Compras')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf"></i> Imprimir / Exportar Relatório
+                    </button>
+                    <button onclick="closeModal('purchaseModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+                </div>
             </div>
 
             <!-- Filtros Internos -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-900/80 p-3 rounded-lg border border-slate-800">
-                <input type="text" id="searchPurchase" onkeyup="filterPurchaseTable()" placeholder="Buscar por produto ou fornecedor..." class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-sky-500">
-                <select id="groupPurchase" onchange="filterPurchaseTable()" class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700">
-                    <option value="">Todos os Grupos</option>
-                </select>
-                <select id="brandPurchase" onchange="filterPurchaseTable()" class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700">
-                    <option value="">Todos os Fornecedores</option>
-                </select>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/80 p-3 rounded-lg border border-slate-800 no-print">
+                <input type="text" id="searchPurchase" onkeyup="filterTable('searchPurchase', 'purchaseTableBody', lowStockData)" placeholder="Buscar por produto ou fornecedor..." class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-sky-500">
+                <div class="text-right text-xs text-slate-400 flex items-center justify-end font-semibold">Exibindo 12 itens críticos</div>
             </div>
 
-            <!-- Tabela de Gestão -->
+            <!-- Tabela com Linhas Verticais e Horizontais -->
             <div class="max-h-96 overflow-y-auto">
-                <table class="w-full text-left text-xs text-white">
-                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-sky-400 sticky top-0">
-                        <tr>
+                <table class="w-full text-left text-xs text-white border-collapse border border-slate-800 divide-y divide-slate-800">
+                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-sky-400 sticky top-0 border-b border-slate-800">
+                        <tr class="divide-x divide-slate-800">
                             <th class="py-3 px-3">Produto</th>
                             <th class="py-3 px-3">Grupo / Fornecedor</th>
                             <th class="py-3 px-3 text-center">Estoque</th>
-                            <th class="py-3 px-3 text-center">Dias Restantes</th>
+                            <th class="py-3 px-3 text-center">Cobertura</th>
                             <th class="py-3 px-3 text-center">Sugerido Compra</th>
-                            <th class="py-3 px-3">Status do Pedido / Causa</th>
+                            <th class="py-3 px-3">Ação / Status do Pedido</th>
                         </tr>
                     </thead>
                     <tbody id="purchaseTableBody" class="divide-y divide-slate-800">
@@ -246,9 +255,9 @@
         </div>
     </div>
 
-    <!-- MODAL DEDICADO 2: CAPITAL PRESO (ESTOQUE ALTO) -->
+    <!-- MODAL 2: CAPITAL PRESO (ESTOQUE ALTO) -->
     <div id="highStockModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
-        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-amber-500/40">
+        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-amber-500/40 print-area">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-boxes-stacked text-amber-400 text-xl"></i>
@@ -257,14 +266,24 @@
                         <p class="text-xs text-slate-300">Produtos com baixo giro ou estoque acima do limite máximo</p>
                     </div>
                 </div>
-                <button onclick="closeModal('highStockModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="exportToFormattedReport('highStockTableBody', 'Relatório de Capital Preso')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf"></i> Imprimir / Exportar Relatório
+                    </button>
+                    <button onclick="closeModal('highStockModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+                </div>
             </div>
 
-            <!-- Tabela de Excesso -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/80 p-3 rounded-lg border border-slate-800 no-print">
+                <input type="text" id="searchHighStock" onkeyup="filterTable('searchHighStock', 'highStockTableBody', highStockData)" placeholder="Buscar por produto ou fornecedor..." class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-sky-500">
+                <div class="text-right text-xs text-slate-400 flex items-center justify-end font-semibold">Exibindo 3 itens em excesso</div>
+            </div>
+
+            <!-- Tabela com Linhas Verticais e Horizontais + Cabeçalhos Azuis -->
             <div class="max-h-96 overflow-y-auto">
-                <table class="w-full text-left text-xs text-white">
-                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-amber-400 sticky top-0">
-                        <tr>
+                <table class="w-full text-left text-xs text-white border-collapse border border-slate-800 divide-y divide-slate-800">
+                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-sky-400 sticky top-0 border-b border-slate-800">
+                        <tr class="divide-x divide-slate-800">
                             <th class="py-3 px-3">Produto</th>
                             <th class="py-3 px-3">Fornecedor</th>
                             <th class="py-3 px-3 text-center">Estoque Atual</th>
@@ -281,9 +300,9 @@
         </div>
     </div>
 
-    <!-- MODAL DEDICADO 3: AUDITORIA DE DIVERGÊNCIAS (ESTOQUE NEGATIVO / ZERADO) -->
+    <!-- MODAL 3: AUDITORIA DE DIVERGÊNCIAS (ESTOQUE NEGATIVO / ZERADO) -->
     <div id="negativeModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
-        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-rose-500/40">
+        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-rose-500/40 print-area">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-triangle-exclamation text-rose-400 text-xl"></i>
@@ -292,14 +311,24 @@
                         <p class="text-xs text-slate-300">Identificação de causas de ruptura e ajustes de inventário</p>
                     </div>
                 </div>
-                <button onclick="closeModal('negativeModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="exportToFormattedReport('negativeTableBody', 'Relatório de Divergências de Estoque')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf"></i> Imprimir / Exportar Relatório
+                    </button>
+                    <button onclick="closeModal('negativeModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+                </div>
             </div>
 
-            <!-- Tabela de Auditoria -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/80 p-3 rounded-lg border border-slate-800 no-print">
+                <input type="text" id="searchNegative" onkeyup="filterTable('searchNegative', 'negativeTableBody', negativeData)" placeholder="Buscar por produto ou fornecedor..." class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-sky-500">
+                <div class="text-right text-xs text-slate-400 flex items-center justify-end font-semibold">Exibindo 2 itens críticos</div>
+            </div>
+
+            <!-- Tabela Padronizada -->
             <div class="max-h-96 overflow-y-auto">
-                <table class="w-full text-left text-xs text-white">
-                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-rose-400 sticky top-0">
-                        <tr>
+                <table class="w-full text-left text-xs text-white border-collapse border border-slate-800 divide-y divide-slate-800">
+                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-sky-400 sticky top-0 border-b border-slate-800">
+                        <tr class="divide-x divide-slate-800">
                             <th class="py-3 px-3">Produto</th>
                             <th class="py-3 px-3">Fornecedor</th>
                             <th class="py-3 px-3 text-center">Qtd. Física</th>
@@ -315,12 +344,56 @@
         </div>
     </div>
 
+    <!-- MODAL 4: DETALHES DE RECEBIMENTO NO MÊS (AGOSTO DE 2026) -->
+    <div id="receiptModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
+        <div class="card-dark w-full max-w-5xl rounded-2xl p-6 shadow-2xl space-y-4 border border-emerald-500/40 print-area">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-truck-ramp-box text-emerald-400 text-xl"></i>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Relatório de Recebimentos de Mercadorias — Agosto 2026</h3>
+                        <p class="text-xs text-slate-300">Entradas físicas e registros de notas de fornecedores no período</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="exportToFormattedReport('receiptTableBody', 'Relatório de Recebimentos de Agosto')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf"></i> Imprimir / Exportar Relatório
+                    </button>
+                    <button onclick="closeModal('receiptModal')" class="text-slate-400 hover:text-white text-xl px-2">&times;</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/80 p-3 rounded-lg border border-slate-800 no-print">
+                <input type="text" id="searchReceipt" onkeyup="filterTable('searchReceipt', 'receiptTableBody', receiptData)" placeholder="Buscar por produto, fornecedor ou data..." class="bg-slate-950 text-xs text-white px-3 py-2 rounded border border-slate-700 focus:outline-none focus:border-sky-500">
+                <div class="text-right text-xs text-slate-400 flex items-center justify-end font-semibold">Total de 1.820 unidades em Agosto</div>
+            </div>
+
+            <div class="max-h-96 overflow-y-auto">
+                <table class="w-full text-left text-xs text-white border-collapse border border-slate-800 divide-y divide-slate-800">
+                    <thead class="bg-slate-900 uppercase text-3xs font-semibold text-sky-400 sticky top-0 border-b border-slate-800">
+                        <tr class="divide-x divide-slate-800">
+                            <th class="py-3 px-3">Data Ent.</th>
+                            <th class="py-3 px-3">Produto</th>
+                            <th class="py-3 px-3">Fornecedor</th>
+                            <th class="py-3 px-3 text-center">Qtd. Recebida</th>
+                            <th class="py-3 px-3 text-right">Valor Total</th>
+                            <th class="py-3 px-3 text-center">Nº Nota Fiscal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receiptTableBody" class="divide-y divide-slate-800">
+                        <!-- JS Populate -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer class="w-full mx-auto mt-auto pt-8 text-center text-xs text-slate-400">
+    <footer class="max-w-6xl w-full mx-auto mt-auto pt-8 text-center text-xs text-slate-400">
         Painel Analítico de Estoque &mdash; Vision Lab Solutions
     </footer>
 
-    <!-- SCRIPT DE DADOS E LÓGICA DE GESTÃO -->
+    <!-- DADOS E CONTROLE JS -->
     <script>
         const lowStockData = [
             { desc: "Linha de costura (500 m)", group: "Linha", brand: "Generosa", stock: 12, days: "3 dias", suggest: "100 un", status: "⚠️ Verificar se já existe pedido emitido com fornecedor" },
@@ -328,7 +401,13 @@
             { desc: "Linha para crochê (200 g)", group: "Linha", brand: "Arte & Fio", stock: 5, days: "1 dia", suggest: "50 un", status: "⚠️ Pedido nº #402 em trânsito com a transportadora" },
             { desc: "Fio de malha (1 kg)", group: "Fio", brand: "Pontal", stock: 14, days: "4 dias", suggest: "40 un", status: "⚠️ Cotando com fornecedores alternativos" },
             { desc: "Tesouras de costura 21 cm", group: "Tesoura", brand: "Carmany", stock: 14, days: "4 dias", suggest: "30 un", status: "🛒 Aguardando aprovação financeira" },
-            { desc: "Fita de gorgurão 25 mm", group: "Fita", brand: "Pontal", stock: 14, days: "3 dias", suggest: "80 un", status: "⚠️ Verificar se já existe pedido emitido com fornecedor" }
+            { desc: "Fita de gorgurão 25 mm", group: "Fita", brand: "Pontal", stock: 14, days: "3 dias", suggest: "80 un", status: "⚠️ Verificar se já existe pedido emitido com fornecedor" },
+            { desc: "Botão decorativo 25 mm", group: "Botão", brand: "Riviera", stock: 13, days: "5 dias", suggest: "120 un", status: "🛒 Em análise de compra" },
+            { desc: "Expositor de aviamentos", group: "Apoio", brand: "Riviera", stock: 3, days: "2 dias", suggest: "10 un", status: "⚠️ Pedido emitido junto ao fornecedor" },
+            { desc: "Linha de costura (100 m)", group: "Linha", brand: "Riviera", stock: 12, days: "4 dias", suggest: "200 un", status: "⚠️ Cotando frete" },
+            { desc: "Elástico roliço 2 mm", group: "Elástico", brand: "Riviera", stock: 15, days: "6 dias", suggest: "100 un", status: "🛒 Verificar estoque da matriz" },
+            { desc: "Zíper invisível 25 cm", group: "Zíper", brand: "Carmany", stock: 15, days: "5 dias", suggest: "150 un", status: "🛒 Pedido agendado" },
+            { desc: "Agulha de mão nº 7", group: "Agulha", brand: "Generosa", stock: 10, days: "3 dias", suggest: "300 un", status: "⚠️ Necessário emitir compra urgente" }
         ];
 
         const highStockData = [
@@ -342,22 +421,33 @@
             { desc: "Linha de costura (500 m)", brand: "Elite", stock: 0, cause: "📉 Esgotado total devido ao pico de demanda sem reposição", action: "🛒 Priorizar entrada da nova nota fiscal" }
         ];
 
+        const receiptData = [
+            { date: "04/08/2026", desc: "Barbante nº 6 Multicolor 400g", brand: "Pontal", qtd: "500 un", total: "R$ 7.500,00", nf: "NF-88231" },
+            { date: "08/08/2026", desc: "Linha de Costura 500m Prata", brand: "Generosa", qtd: "400 un", total: "R$ 4.800,00", nf: "NF-88302" },
+            { date: "12/08/2026", desc: "Tesoura Alfaiate 21cm Gold", brand: "Carmany", qtd: "120 un", total: "R$ 5.400,00", nf: "NF-88415" },
+            { date: "15/08/2026", desc: "Fita Métrica 150cm Profissional", brand: "Arte & Fio", qtd: "200 un", total: "R$ 1.200,00", nf: "NF-88500" },
+            { date: "19/08/2026", desc: "Zíper Reforçado de Metal 50cm", brand: "YKK Aviamentos", qtd: "300 un", total: "R$ 6.000,00", nf: "NF-88612" },
+            { date: "22/08/2026", desc: "Elástico Chato 20mm Rolo 50m", brand: "Riviera", qtd: "100 un", total: "R$ 3.500,00", nf: "NF-88740" },
+            { date: "25/08/2026", desc: "Agulhas para Crochê Soft 3.5mm", brand: "Estrela do Sul", qtd: "150 un", total: "R$ 2.250,00", nf: "NF-88890" },
+            { date: "28/08/2026", desc: "Botão de Madeira 20mm (Pct 100un)", brand: "Riviera", qtd: "50 un", total: "R$ 1.500,00", nf: "NF-88950" }
+        ];
+
         document.addEventListener("DOMContentLoaded", () => {
             populatePurchaseTable(lowStockData);
-            populateHighStockTable();
-            populateNegativeTable();
+            populateHighStockTable(highStockData);
+            populateNegativeTable(negativeData);
+            populateReceiptTable(receiptData);
         });
 
         function populatePurchaseTable(data) {
             const tbody = document.getElementById("purchaseTableBody");
             tbody.innerHTML = "";
-
             data.forEach(item => {
                 const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-800/50 border-b border-slate-800";
+                tr.className = "hover:bg-slate-800/50 border-b border-slate-800 divide-x divide-slate-800";
                 tr.innerHTML = `
                     <td class="py-3 px-3 font-semibold text-white">${item.desc}</td>
-                    <td class="py-3 px-3 text-slate-300">${item.group} &bull; <span class="text-sky-400">${item.brand}</span></td>
+                    <td class="py-3 px-3 text-slate-300">${item.group} &bull; <span class="text-sky-400 font-medium">${item.brand}</span></td>
                     <td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/40">${item.stock}</span></td>
                     <td class="py-3 px-3 text-center text-rose-400 font-bold">${item.days}</td>
                     <td class="py-3 px-3 text-center text-emerald-400 font-bold">${item.suggest}</td>
@@ -367,16 +457,16 @@
             });
         }
 
-        function populateHighStockTable() {
+        function populateHighStockTable(data) {
             const tbody = document.getElementById("highStockTableBody");
             tbody.innerHTML = "";
-            highStockData.forEach(item => {
+            data.forEach(item => {
                 const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-800/50 border-b border-slate-800";
+                tr.className = "hover:bg-slate-800/50 border-b border-slate-800 divide-x divide-slate-800";
                 tr.innerHTML = `
                     <td class="py-3 px-3 font-semibold text-white">${item.desc}</td>
-                    <td class="py-3 px-3 text-sky-400">${item.brand}</td>
-                    <td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40">${item.stock}</span></td>
+                    <td class="py-3 px-3 text-sky-400 font-medium">${item.brand}</td>
+                    <td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/40">${item.stock}</span></td>
                     <td class="py-3 px-3 text-center text-slate-300">${item.daysOff}</td>
                     <td class="py-3 px-3 text-right font-extrabold text-emerald-400">${item.value}</td>
                     <td class="py-3 px-3 text-slate-200">${item.action}</td>
@@ -385,34 +475,61 @@
             });
         }
 
-        function populateNegativeTable() {
+        function populateNegativeTable(data) {
             const tbody = document.getElementById("negativeTableBody");
             tbody.innerHTML = "";
-            negativeData.forEach(item => {
+            data.forEach(item => {
                 const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-800/50 border-b border-slate-800";
+                tr.className = "hover:bg-slate-800/50 border-b border-slate-800 divide-x divide-slate-800";
                 const badge = item.stock < 0 ? 'bg-rose-500/20 text-rose-400 border-rose-500/50' : 'bg-slate-800 text-slate-300 border-slate-700';
                 tr.innerHTML = `
                     <td class="py-3 px-3 font-semibold text-white">${item.desc}</td>
-                    <td class="py-3 px-3 text-sky-400">${item.brand}</td>
+                    <td class="py-3 px-3 text-sky-400 font-medium">${item.brand}</td>
                     <td class="py-3 px-3 text-center"><span class="px-2 py-0.5 rounded font-bold border ${badge}">${item.stock}</span></td>
                     <td class="py-3 px-3 text-slate-200">${item.cause}</td>
-                    <td class="py-3 px-3 text-sky-400 font-medium">${item.action}</td>
+                    <td class="py-3 px-3 text-sky-400 font-semibold">${item.action}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function filterPurchaseTable() {
-            const q = document.getElementById("searchPurchase").value.toLowerCase();
-            const filtered = lowStockData.filter(i => i.desc.toLowerCase().includes(q) || i.brand.toLowerCase().includes(q));
-            populatePurchaseTable(filtered);
+        function populateReceiptTable(data) {
+            const tbody = document.getElementById("receiptTableBody");
+            tbody.innerHTML = "";
+            data.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-800/50 border-b border-slate-800 divide-x divide-slate-800";
+                tr.innerHTML = `
+                    <td class="py-3 px-3 text-slate-300 font-mono text-xs">${item.date}</td>
+                    <td class="py-3 px-3 font-semibold text-white">${item.desc}</td>
+                    <td class="py-3 px-3 text-sky-400 font-medium">${item.brand}</td>
+                    <td class="py-3 px-3 text-center font-bold text-amber-400">${item.qtd}</td>
+                    <td class="py-3 px-3 text-right font-bold text-emerald-400">${item.total}</td>
+                    <td class="py-3 px-3 text-center text-slate-400 font-mono text-xs">${item.nf}</td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
-        function openPurchaseModal() { document.getElementById("purchaseModal").classList.remove("hidden"); }
-        function openHighStockModal() { document.getElementById("highStockModal").classList.remove("hidden"); }
-        function openNegativeModal() { document.getElementById("negativeModal").classList.remove("hidden"); }
+        function filterTable(inputId, tbodyId, rawData) {
+            const q = document.getElementById(inputId).value.toLowerCase();
+            const filtered = rawData.filter(i => 
+                (i.desc && i.desc.toLowerCase().includes(q)) || 
+                (i.brand && i.brand.toLowerCase().includes(q)) ||
+                (i.date && i.date.toLowerCase().includes(q))
+            );
+            if(tbodyId === 'purchaseTableBody') populatePurchaseTable(filtered);
+            if(tbodyId === 'highStockTableBody') populateHighStockTable(filtered);
+            if(tbodyId === 'negativeTableBody') populateNegativeTable(filtered);
+            if(tbodyId === 'receiptTableBody') populateReceiptTable(filtered);
+        }
+
+        function openModal(id) { document.getElementById(id).classList.remove("hidden"); }
         function closeModal(id) { document.getElementById(id).classList.add("hidden"); }
+
+        function exportToFormattedReport(tableBodyId, title) {
+            window.print();
+        }
     </script>
 </body>
 </html>
